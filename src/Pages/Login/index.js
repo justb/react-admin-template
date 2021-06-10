@@ -1,39 +1,30 @@
 import React, {Component} from 'react';
 import {withRouter} from "react-router-dom";
 import { Form, Input, Button, message } from 'antd';
-import IconFont from '../../components/IconFont';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import styles from './index.module.css';
 
 class Login extends Component{
+    onSubmit(e){
+        localStorage.setItem('currentUser', "123");
+        this.props.history.push('/');
+        // message.error('登录失败!');
+        return false;
+    }
     render(){
-        const { getFieldDecorator } = this.props.form;
         return (
             <div className={styles.loginWrap}>
                 <div className={styles.msLogin}>
                     <div className={styles.msTitle}>后台管理系统</div>
-                    <Form className={styles.msContent}>
-                        <Form.Item>
-                            {
-                                getFieldDecorator('username', {
-                                    initialValue: 'admin',
-                                    rules: [{ required: true, message: '请输入用户名' }],
-                                })(
-                                    <Input addonBefore={<IconFont type="anticon-lx-people" />} />
-                                )
-                            }
+                    <Form onFinish={this.onSubmit.bind(this)} className={styles.msContent}>
+                        <Form.Item name={'username'} rules={ [{ required: true, message: '请输入用户名' }]} initialValue={'admin'}>
+                                    <Input addonBefore={<UserOutlined></UserOutlined>} />
                         </Form.Item>
-                        <Form.Item>
-                            {
-                                getFieldDecorator('password', {
-                                    initialValue: 'admin',
-                                    rules: [{ required: true, message: '请输入密码' }],
-                                })(
-                                    <Input type="password" addonBefore={<IconFont type="anticon-lx-lock" />} />
-                                )
-                            }
+                        <Form.Item name={'password'} rules={ [{ required: true, message: '请输入密码' }]} initialValue={'admin'}>
+                                    <Input type="password" addonBefore={<LockOutlined />} />
                         </Form.Item>
                         <div className={styles.loginBtn}>
-                            <Button type="primary" onClick={this.onSubmit.bind(this)}>登录</Button>
+                            <Button type="primary" type="primary" htmlType="submit">登录</Button>
                         </div>
                         <p className={styles.loginTips}>Tips : 用户名和密码随便填。</p>
                     </Form>
@@ -41,18 +32,6 @@ class Login extends Component{
             </div>
         )
     }
-    onSubmit(e){
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                localStorage.setItem('ms_username', values.username);
-                this.props.history.push('/main/dashboard');
-            } else {
-                message.error('登录失败!');
-                return false;
-            }
-        });
-    }
 }
 
-export default Form.create({ name: 'login' })(withRouter(Login));
+export default withRouter((Login));
