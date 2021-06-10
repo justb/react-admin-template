@@ -26,7 +26,7 @@ instance.interceptors.response.use(
     // 服务器状态码不是 200 的情况
     (error) => {
         console.log('error: ', error)
-        if (error.response.status) {
+        if (error?.response?.status) {
             switch (error.response.status) {
                 case 401:
                     break

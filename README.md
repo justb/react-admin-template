@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Simple template with create-react-app + react-router + axios
+
+### screenshots:
+
+![screenshot](./screenshot.jpg)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
