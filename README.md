@@ -2,7 +2,9 @@
 
 ### screenshots:
 
-![screenshot](./screenshot.jpg)
+![loginPage](./screenshot2.jpg)
+
+![mainPage](./screenshot.jpg)
 
 ## Getting Started with Create React App
 
